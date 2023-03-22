@@ -18,8 +18,6 @@ export default function Home() {
         setUser(user);
     }
 
-
-
     return (
         <PageContainer>
             <p>Escolha seu Plano </p>
