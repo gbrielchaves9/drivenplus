@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function Primeira() {
     const { setUser } = useContext(UserContext);
     const [email, setEmail] = useState("")
-    const [	password, setSenha] = useState("")
+    const [password, setSenha] = useState("")
     const navigate = useNavigate();
 
     function handleLogin(user) {
@@ -21,9 +21,9 @@ export default function Primeira() {
 
     function enviaDados(e) {
         e.preventDefault();
-        const dadosConta = { email,password };
+        const dadosConta = { email: email, password: password };
         axios
-            .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", dadosConta)
+            .post("https://mock-api.driven.com.br/api/v4/driven-plus/auth/login", dadosConta)
             .then((res) => {
                 handleLogin(res.data);
                 alert("login ok")
@@ -31,7 +31,7 @@ export default function Primeira() {
             .catch((err) => {
                 alert("erro ")
                 console.log(err.data);
-                console.log(err.dadosConta);
+                console.log(dadosConta);
             });
     }
 
@@ -39,9 +39,7 @@ export default function Primeira() {
         <PageContainer>
             <img src={logo} alt={"carregando"} />
 
-
-
-            <ListContainer  >
+            <ListContainer>
                 <form onSubmit={enviaDados}>
                     <input type="email" placeholder="E-mail"
                         required
@@ -50,18 +48,16 @@ export default function Primeira() {
                     />
                     <input type="password" placeholder="senha"
                         required
-                        value={	password}
+                        value={password}
                         onChange={e => setSenha(e.target.value)}
                     />
-                    <button data-test="book-seat-btn" type="submit" >Entrar</button>
+                    <button data-test="book-seat-btn" type="submit">Entrar</button>
                 </form>
             </ListContainer>
-            <Link to={`/cadastro`} data-test="movie" >
+            <Link to={`/cadastro`} data-test="movie">
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
         </PageContainer>
-
-
     )
 }
 
@@ -72,8 +68,6 @@ background-color:black;
     align-items: center;
     font-size: 24px;
     text-align: center;
-    color: #293845;
-    margin-top: 65px;
     img{
         height: 178px;
         width: 180px;
@@ -86,7 +80,6 @@ text-align: center;
     }
 `
 const ListContainer = styled.label`
-background-color:black;
     width: calc(100vw - 40px); 
     display: flex;
     flex-direction: column;

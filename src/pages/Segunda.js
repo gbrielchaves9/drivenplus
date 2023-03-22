@@ -5,24 +5,29 @@ import { Link } from "react-router-dom";
 import axios from "axios"
 
 export default function Segunda() {
-    const [form, setForm] = useState({ email: "", password: "", image: "", name: "" })
+    const [form, setForm] = useState({ email: "", password: "", name: "", cpf: "" })
     function pegaDados(event) {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
     function enviaDados(e) {
         e.preventDefault()
-        const dadosConta = { ...form }
+        const dadosConta = {
+            email: form.email,
+            name: form.name,
+            cpf: form.cpf,
+            password: form.password,
+        }
         console.log(dadosConta)
-        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
+        const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up"
         const promise = axios.post(URL, dadosConta);
         promise
             .then(res => {
-                setForm(res.data)
-                alert("usuario cadastrado !")
-            
+                console.log(res.data);
+                alert("usuário cadastrado!")
             })
             .catch(err => console.log(err.response.data));
+            alert("erro no cadastro !")
     }
     return (
         <PageContainer>
@@ -30,36 +35,41 @@ export default function Segunda() {
 
             <ListContainer>
                 <form onSubmit={enviaDados}>
-                    <input data-test="email-input"
-                    type="email" placeholder="E-mail"
-                        required
-                        name="email"
-                        value={form.email}
-                        onChange={pegaDados}
-                    />
-                
-                    <input data-test="password-input" 
-                    type="password" placeholder="senha"
-                        required
-                        name="password"
-                        value={form.password}
-                        onChange={pegaDados}
-                    />
-                    <input data-test="user-name-input"
-                     type="text" placeholder="nome"
+                    <input
+                        type="text"
+                        placeholder="nome"
                         required
                         name="name"
                         value={form.name}
                         onChange={pegaDados}
                     />
-                    <input data-test="user-image-input"
-                        type="url" placeholder="foto"
+                    <input
+                        type="text"
+                        placeholder="cpf"
                         required
-                        name="image"
-                        value={form.image}
+                        name="cpf"
+                        value={form.cpf}
                         onChange={pegaDados}
                     />
-                    <button data-test="signup-btn" type="submit" >Cadastrar</button>
+                    <input
+                        type="email"
+                        placeholder="E-mail"
+                        required
+                        name="email"
+                        value={form.email}
+                        onChange={pegaDados}
+                    />
+                    <input
+                        type="password"
+                        placeholder="senha"
+                        required
+                        name="password"
+                        value={form.password}
+                        onChange={pegaDados}
+                    />
+                    <button type="submit">
+                        Cadastrar
+                    </button>
                 </form>
             </ListContainer>
 
