@@ -28,15 +28,28 @@ export default function Plano() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const data = {
             cardName,
             cardNumber,
             securityNumber,
             expirationDate,
+            membershipId: plano.id, // adiciona o ID do plano aqui
         };
-
-        console.log(data);
+    
+        const token = localStorage.getItem("token");
+        axios
+            .post(`https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
     return (
         <PlanoContainer>
@@ -92,4 +105,48 @@ const PlanoContainer = styled.div`
   align-items: center;
   p{
     color:white}
+`;
+const FormContainer = styled.div`
+  background-color: #f2f2f2;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 400px;
+
+  h2 {
+    margin-top: 0;
+  }
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+`;
+
+const Button = styled.button`
+  background-color: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1b5e20;
+  }
 `;
