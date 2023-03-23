@@ -27,14 +27,14 @@ export default function Subscriptions() {
         <PlanosContainer>
             <p>Escolha seu Plano </p>
             {planos.map((plano) => (
-                <Plano key={plano.id}>
-                    <Link to={`/subscriptions/${plano.id}`}>
-                        <img src={plano.image} alt="plano" />
+                <Link to={`/subscriptions/${plano.id}`} key={plano.id}>
+                    <Plano>
                         <div>
+                            <img src={plano.image} alt="plano" />
                             <p> R${plano.price}</p>
                         </div>
-                    </Link>
-                </Plano>
+                    </Plano>
+                </Link>
             ))}
         </PlanosContainer>
     );
@@ -46,7 +46,8 @@ const PlanosContainer = styled.div`
   flex-direction:column;
   align-items: center;
   p{
-    color:white}
+    font-size: 32px;
+    color: white;}
 `;
 
 const Plano = styled.div`
@@ -54,10 +55,12 @@ const Plano = styled.div`
   width: 290px;
   border-radius: 12px;
   display:flex;
+  
   margin-top:91px;
   border: 3px solid #7E7E7E;
   img{
     height: 95px;
     width: 140px;
   }
+  
 `;

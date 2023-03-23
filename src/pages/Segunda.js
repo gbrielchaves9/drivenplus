@@ -101,6 +101,8 @@ const ListContainer = styled.label`
     align-items: center;
     margin: 20px 0;
     font-size: 18px;
+
+
     button {
         display:flex;
         justify-content: center;

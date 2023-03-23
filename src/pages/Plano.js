@@ -75,8 +75,8 @@ export default function Plano() {
                 <p> Vantagens:</p>
                 {plano.perks && (
                     <ul>
-                        {plano.perks.map((perk) => (
-                            <li key={perk.id}>{perk.title}</li>
+                        {plano.perks.map((perk, index) => (
+                            <li key={perk.id}>{`${index + 1}. ${perk.title}`}</li>
                         ))}
                     </ul>
                 )}
@@ -125,9 +125,11 @@ export default function Plano() {
                 <Button type="submit" onClick={handleOpenModal}>Assinar</Button>
                 {showModal && (
                     <Modal>
-                        <p>Tem certeza que deseja assinar o plano Driven Plus (R$ {plano.value.toFixed(2)})?</p>
-                        <button onClick={handleConfirm}>sim</button>
-                        <button onClick={handleCancel}>Não</button>
+                        <div>
+                            <p>Tem certeza que deseja assinar o plano Driven Plus </p>
+                            <button onClick={handleConfirm}>sim</button>
+                            <button onClick={handleCancel}>Não</button>
+                        </div>
                     </Modal>
                 )}
             </FormContainer>
@@ -177,7 +179,9 @@ const PlanoContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-  
+  li{
+    color: white;
+  }
     p {
       color: white;
     }
