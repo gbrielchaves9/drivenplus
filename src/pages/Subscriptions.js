@@ -27,13 +27,15 @@ export default function Subscriptions() {
 
     return (
         <PlanosContainer>
-               <p>Escolha seu Plano </p>
+            <p>Escolha seu Plano </p>
             {planos.map((plano) => (
                 <Plano key={plano.id}>
-                    <img src={plano.image} alt="plano" />
-                    <div>
-                        <p> R${plano.price}</p>
-                    </div>
+                    <Link to={`/subscriptions/${plano.id}`}>
+                        <img src={plano.image} alt="plano" />
+                        <div>
+                            <p> R${plano.price}</p>
+                        </div>
+                    </Link>
                 </Plano>
             ))}
         </PlanosContainer>

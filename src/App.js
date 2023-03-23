@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Primeira from "./pages/Primeira";
 import Segunda from "./pages/Segunda";
 import Home from "./pages/Home";
+import Plano from "./pages/Plano";
 import Subscriptions from "./pages/Subscriptions";
 import { Navigate } from "react-router-dom";
 
@@ -27,8 +28,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Primeira />} />
           <Route path="/cadastro" element={<Segunda />} />
-          <Route path="/Home" element={<Home />} />
           <Route path="/subscriptions" element={user ? <Subscriptions /> : <Navigate to="/" />} />
+          <Route path="/subscriptions/:id" element={user ? <Plano /> : <Navigate to="/" />} />
+          <Route path="/Home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
