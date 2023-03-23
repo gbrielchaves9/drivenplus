@@ -16,6 +16,7 @@ export default function Plano() {
             })
             .then((response) => {
                 setPlano(response.data);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -28,15 +29,15 @@ export default function Plano() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         const data = {
             cardName,
             cardNumber,
             securityNumber,
             expirationDate,
-            membershipId: plano.id, // adiciona o ID do plano aqui
+            membershipId: plano.id,
         };
-    
+
         const token = localStorage.getItem("token");
         axios
             .post(`https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions`, data, {
@@ -45,7 +46,8 @@ export default function Plano() {
                 },
             })
             .then((response) => {
-                console.log(response.data);
+                console.log(response);
+                alert("pedido enviado")
             })
             .catch((error) => {
                 console.log(error);
@@ -53,100 +55,113 @@ export default function Plano() {
     }
     return (
         <PlanoContainer>
-            <p>{plano.name}</p>
             <img src={plano.image} alt="plano" />
             <div>
-                <p> R${plano.price}</p>
-                <p>Vantagens:</p>
+                <p> Vantagens:</p>
+                {plano.perks && (
+                    <ul>
+                        {plano.perks.map((perk) => (
+                            <li key={perk.id}>{perk.title}</li>
+                        ))}
+                    </ul>
+                )}
             </div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="cardName">Nome do titular do cartão:</label>
-                <input
-                    type="text"
-                    id="cardName"
-                    value={cardName}
-                    onChange={(event) => setCardName(event.target.value)}
-                    required
-                />
-                <label htmlFor="cardNumber">Número do cartão:</label>
-                <input
-                    type="text"
-                    id="cardNumber"
-                    value={cardNumber}
-                    onChange={(event) => setCardNumber(event.target.value)}
-                    required
-                />
-                <label htmlFor="securityNumber">Código de segurança:</label>
-                <input
-                    type="number"
-                    id="securityNumber"
-                    value={securityNumber}
-                    onChange={(event) => setSecurityNumber(event.target.value)}
-                    required
-                />
-                <label htmlFor="expirationDate">Data de expiração:</label>
-                <input
-                    type="text"
-                    id="expirationDate"
-                    value={expirationDate}
-                    onChange={(event) => setExpirationDate(event.target.value)}
-                    required
-                />
-                <button type="submit">Enviar</button>
-            </form>
-
+            <FormContainer onSubmit={handleSubmit}>
+                <InputContainer>
+            
+                    <input placeholder="Nome impresso no cartão"
+                        type="text"
+                        id="cardName"
+                        value={cardName}
+                        onChange={(event) => setCardName(event.target.value)}
+                        required
+                    />
+                </InputContainer>
+                <InputContainer>
+                   
+                    <input placeholder="Digitos do cartão"
+                        type="text"
+                        id="cardNumber"
+                        value={cardNumber}
+                        onChange={(event) => setCardNumber(event.target.value)}
+                        required
+                    />
+                </InputContainer>
+                <InputContainer>
+                
+                    <input placeholder="Código de segurança"
+                        type="number"
+                        id="securityNumber"
+                        value={securityNumber}
+                        onChange={(event) => setSecurityNumber(event.target.value)}
+                        required
+                    />
+                </InputContainer>
+                <InputContainer>
+                
+                    <input placeholder="Validade"
+                        type="text"
+                        id="expirationDate"
+                        value={expirationDate}
+                        onChange={(event) => setExpirationDate(event.target.value)}
+                        required
+                    />
+                </InputContainer>
+                <Button type="submit">Assinar</Button>
+            </FormContainer>
         </PlanoContainer>
     );
 }
-const PlanoContainer = styled.div`
-  background-color:black;
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-  p{
-    color:white}
-`;
-const FormContainer = styled.div`
-  background-color: #f2f2f2;
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 16px;
-  width: 100%;
-  max-width: 400px;
 
-  h2 {
-    margin-top: 0;
-  }
-`;
+const PlanoContainer = styled.div`
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    p {
+      color: white;
+    }
+    img{height:96px;
+width: 139px;
+}
+  `;
+
+const FormContainer = styled.form`
+  background: #0E0E13;
+
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 400px;
+  
+  `;
+  
 
 const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-
-  label {
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-
-  input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-`;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+  
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  `;
 
 const Button = styled.button`
-  background-color: #2e7d32;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #1b5e20;
-  }
-`;
+    background: #FF4791;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  `;

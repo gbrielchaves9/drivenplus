@@ -91,6 +91,7 @@ const PageContainer = styled.div`
         height: 178px;
         width: 180px;
     }
+
     p{
         font-family: Lexend Deca;
 font-size: 14px;
