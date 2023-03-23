@@ -6,9 +6,6 @@ import Home from "./pages/Home";
 import Plano from "./pages/Plano";
 import Subscriptions from "./pages/Subscriptions";
 import { Navigate } from "react-router-dom";
-
-
-
 export const UserContext = createContext(null);
 
 export default function App() {

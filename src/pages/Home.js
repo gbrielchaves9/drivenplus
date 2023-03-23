@@ -6,9 +6,18 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Olá, {user.name}!</h1>
-      <img src={user.image} alt="Imagem do usuário" />
-      <h2>{user.title}</h2>
+      {user.membership && (
+        <div>
+          <img src={user.membership.image} alt="Imagem do plano" />
+          <h2>{user.membership.name}</h2>
+          <p>Preço: R${user.membership.price}/mês</p>
+          <ul>
+            {user.membership.perks.map(perk => (
+              <li key={perk.id}>{perk.title}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

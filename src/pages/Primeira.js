@@ -26,24 +26,25 @@ export default function Primeira() {
         e.preventDefault();
         const dadosConta = { email: email, password: password };
         axios
-          .post('https://mock-api.driven.com.br/api/v4/driven-plus/auth/login', dadosConta)
-          .then(res => {
-            const token = res.data.token;
-            setUser(token);
-            localStorage.setItem('token', token);
-            alert("dados enviados");
-      
-            if (res.data.membership === null) {
-              navigate("/subscriptions");
-            } else {
-              navigate("/home");
-            }
-          })
-          .catch(err => {
-            alert('Erro');
-            console.log(err.data);
-          });
-      }
+            .post('https://mock-api.driven.com.br/api/v4/driven-plus/auth/login', dadosConta)
+            .then(res => {
+                const token = res.data.token;
+                const membership = res.data.membership;
+                setUser({
+                    token: token,
+                    name: res.data.name,
+                    cpf: res.data.cpf,
+                    email: res.data.email,
+                    membership: membership
+                });
+                localStorage.setItem('token', token);
+                navigate(membership ? "/home" : "/subscriptions");
+            })
+            .catch(err => {
+                alert('Erro');
+                console.log(err.data);
+            });
+    }
 
     return (
         <PageContainer>
