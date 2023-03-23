@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
-//import Branca from "../assets/Branca.png";
-//import Verde from "../assets/Verde.png";
-//import Amarelo from "../assets/Amarelo.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 export default function Subscriptions() {

@@ -26,10 +26,25 @@ export default function Plano() {
     const [cardNumber, setCardNumber] = useState('');
     const [securityNumber, setSecurityNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
+    const handleOpenModal = (event) => {
+        event.preventDefault();
+        setShowModal(true);
+    };
+
+    const handleConfirm = (event) => {
+        event.preventDefault();
+        handleSubmit(event);
+        setShowModal(false);
+    };
+
+    const handleCancel = () => {
+        setShowModal(false);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const data = {
             cardName,
             cardNumber,
@@ -68,7 +83,7 @@ export default function Plano() {
             </div>
             <FormContainer onSubmit={handleSubmit}>
                 <InputContainer>
-            
+
                     <input placeholder="Nome impresso no cartão"
                         type="text"
                         id="cardName"
@@ -78,7 +93,7 @@ export default function Plano() {
                     />
                 </InputContainer>
                 <InputContainer>
-                   
+
                     <input placeholder="Digitos do cartão"
                         type="text"
                         id="cardNumber"
@@ -88,7 +103,7 @@ export default function Plano() {
                     />
                 </InputContainer>
                 <InputContainer>
-                
+
                     <input placeholder="Código de segurança"
                         type="number"
                         id="securityNumber"
@@ -98,7 +113,7 @@ export default function Plano() {
                     />
                 </InputContainer>
                 <InputContainer>
-                
+
                     <input placeholder="Validade"
                         type="text"
                         id="expirationDate"
@@ -107,11 +122,55 @@ export default function Plano() {
                         required
                     />
                 </InputContainer>
-                <Button type="submit">Assinar</Button>
+                <Button type="submit" onClick={handleOpenModal}>Assinar</Button>
+                {showModal && (
+                    <Modal>
+                        <p>Tem certeza que deseja assinar o plano Driven Plus (R$ {plano.value.toFixed(2)})?</p>
+                        <button onClick={handleConfirm}>sim</button>
+                        <button onClick={handleCancel}>Não</button>
+                    </Modal>
+                )}
             </FormContainer>
         </PlanoContainer>
     );
 }
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    background-color: #FFFFFF;
+    height: 210px;
+    width: 248px;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color:green;
+  }
+`;
+
 
 const PlanoContainer = styled.div`
     background-color: black;
@@ -129,7 +188,6 @@ width: 139px;
 
 const FormContainer = styled.form`
   background: #0E0E13;
-
     padding: 16px;
     border-radius: 8px;
     margin-top: 16px;
@@ -137,7 +195,7 @@ const FormContainer = styled.form`
     max-width: 400px;
   
   `;
-  
+
 
 const InputContainer = styled.div`
     display: flex;

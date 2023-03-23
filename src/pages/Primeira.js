@@ -32,7 +32,7 @@ export default function Primeira() {
                 setUser(token);
                 localStorage.setItem('token', token);
                 alert("dados enviados")
-                navigate("/subscriptions"); 
+                navigate("/subscriptions");
                 console.log(res.data)
             })
             .catch(err => {
@@ -68,16 +68,14 @@ export default function Primeira() {
 }
 
 const PageContainer = styled.div`
-background-color:black;
+ width: 100%;
+    height: 100vh;
+    background-color: black;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-size: 24px;
-    text-align: center;
-    img{
-        height: 178px;
-        width: 180px;
-    }
+    gap: 100px;
     p{
         font-family: Lexend Deca;
 font-size: 14px;
@@ -88,13 +86,14 @@ text-align: center;
 const ListContainer = styled.label`
     width: calc(100vw - 40px); 
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin: 20px 0;
     font-size: 18px;
     button {
+        display:flex;
+        justify-content: center;
         align-self: center;
-        background: #52B6FF;
+        background: #FF4791;
     }
     input {
         width: calc(100vw - 60px);
