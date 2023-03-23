@@ -3,7 +3,9 @@ import axios from 'axios';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
+
 export default function Subscriptions() {
+    const { user } = useContext(UserContext);
     const [planos, setPlanos] = useState([]);
 
     useEffect(() => {
@@ -23,11 +25,15 @@ export default function Subscriptions() {
             });
     }, []);
 
+    const handleSelectPlan = (plano) => {
+        localStorage.setItem("planoSelecionado", JSON.stringify(plano));
+    };
+
     return (
         <PlanosContainer>
             <p>Escolha seu Plano </p>
             {planos.map((plano) => (
-                <Link to={`/subscriptions/${plano.id}`} key={plano.id}>
+                <Link to={`/subscriptions/${plano.id}`} key={plano.id} onClick={() => handleSelectPlan(plano)}>
                     <Plano>
                         <div>
                             <img src={plano.image} alt="plano" />

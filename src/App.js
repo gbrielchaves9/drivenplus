@@ -23,13 +23,13 @@ export default function App() {
 
 
   return (
-    <UserContext.Provider value={{ user, setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Primeira />} />
           <Route path="/cadastro" element={<Segunda />} />
-          <Route path="/subscriptions" element={user ? <Subscriptions /> : <Navigate to="/" />} />
-          <Route path="/subscriptions/:id" element={user ? <Plano /> : <Navigate to="/" />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
+          <Route path="/subscriptions/:id" element={<Plano />} />
           <Route path="/Home" element={<Home />} />
         </Routes>
       </BrowserRouter>

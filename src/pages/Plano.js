@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 export default function Plano() {
     const [plano, setPlano] = useState({});
     const { id } = useParams();
+    const [valor, setValor] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -126,7 +127,7 @@ export default function Plano() {
                 {showModal && (
                     <Modal>
                         <div>
-                            <p>Tem certeza que deseja assinar o plano Driven Plus </p>
+                            <p>Tem certeza que deseja assinar o plano R$ {plano.price}?</p>
                             <button onClick={handleConfirm}>sim</button>
                             <button onClick={handleCancel}>Não</button>
                         </div>
@@ -153,12 +154,13 @@ const Modal = styled.div`
     width: 248px;
     padding: 20px;
     border-radius: 5px;
+    p {
+    font-size: 18px;
+    color:black;
+  }
   }
 
-  p {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
+ 
 
   button {
     margin: 10px;
@@ -195,8 +197,12 @@ const FormContainer = styled.form`
     padding: 16px;
     border-radius: 8px;
     margin-top: 16px;
-    width: 100%;
-    max-width: 400px;
+    width: 80%;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+
+    
   
   `;
 
@@ -205,7 +211,7 @@ const InputContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
-  
+    width: 80%;
     label {
       font-weight: bold;
       margin-bottom: 8px;
