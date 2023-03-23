@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 export default function Plano() {
     const [plano, setPlano] = useState({});
     const { id } = useParams();
-    const [valor, setValor] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem("token");

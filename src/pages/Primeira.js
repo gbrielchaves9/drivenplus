@@ -60,7 +60,7 @@ export default function Primeira() {
                     <button type="submit">Entrar</button>
                 </form>
             </ListContainer>
-            <Link to={`/cadastro`} data-test="movie">
+            <Link to={`/cadastro`} >
                 <p>Não possuí uma conta? Cadastre-se</p>
             </Link>
         </PageContainer>
