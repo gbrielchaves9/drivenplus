@@ -37,6 +37,7 @@ export default function Primeira() {
                     email: res.data.email,
                     membership: membership
                 });
+                console.log(res.data);
                 localStorage.setItem('token', token);
                 navigate(membership ? "/home" : "/subscriptions");
             })
