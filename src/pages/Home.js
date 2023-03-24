@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../App';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 export default function Home() {
     const { user } = useContext(UserContext);
 
@@ -13,16 +13,18 @@ export default function Home() {
                         <img src={user.membership.image} alt="Imagem do plano" />
                         <h2>Olá,{user.name}</h2>
 
-                        <div>
-                            {user.membership.perks.map(perk => (
-                                <Button key={perk.id}>{perk.title}</Button>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                     <div>
+              {user.membership.perks.map(perk => (
+                <Button key={perk.id}>
+                  <Link to={perk.link}>{perk.title}</Link>
+                </Button>
+              ))}
             </div>
-        </Container>
-    );
+          </div>
+        )}
+      </div>
+    </Container>
+  );
 }
 
 const Button = styled.button`
@@ -37,7 +39,6 @@ width: 299px;
 
 border-radius: 8px;
 
-
 `;
 const Container = styled.div`
   color: white;
@@ -49,3 +50,4 @@ width: 49px;
 
   }
 `;
+

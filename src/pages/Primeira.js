@@ -46,7 +46,6 @@ export default function Primeira() {
                 console.log(err.data);
             });
     }
-
     return (
         <PageContainer>
             <img src={logo} alt={"carregando"} />
