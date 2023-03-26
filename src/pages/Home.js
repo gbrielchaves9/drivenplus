@@ -9,6 +9,7 @@ export default function Home() {
     const { user } = useContext(UserContext);
   
     const handleChangePlan = () => {
+        alert("escolha um  plano novo !");
       navigate('/subscriptions');
     };
   
@@ -23,6 +24,7 @@ export default function Home() {
         deletar
       );
       promise.then(() => {
+        alert("seu plano foi deletado , escolha um novo !");
         navigate('/subscriptions');
       });
       promise.catch(() => {
