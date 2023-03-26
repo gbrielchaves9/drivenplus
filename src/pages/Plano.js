@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { UserContext } from '../App';
 export default function Plano() {
     const [plano, setPlano] = useState({});
     const { id } = useParams();
+
 
     useEffect(() => {
         const token = localStorage.getItem("token");

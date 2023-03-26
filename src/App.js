@@ -1,4 +1,4 @@
-import React, { createContext, useState , useEffect} from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Primeira from "./pages/Primeira";
 import Segunda from "./pages/Segunda";
@@ -10,17 +10,17 @@ export const UserContext = createContext(null);
 
 export default function App() {
   const [user, setUser] = useState(null);
-
+  const [cardData, setCardData] = useState(null);
   useEffect(() => {
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
     if (token) {
-      setUser(token); 
+      setUser(token);
     }
   }, []);
 
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, cardData, setCardData }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Primeira />} />

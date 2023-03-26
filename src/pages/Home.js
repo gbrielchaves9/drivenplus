@@ -2,38 +2,56 @@ import React, { useContext } from 'react';
 import { UserContext } from '../App';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function Home() {
+    const navigate = useNavigate();
     const { user } = useContext(UserContext);
-
-    const handleCancelPlan = () => {
-        alert("oi")
-    }
-
+  
     const handleChangePlan = () => {
-        alert("oi")
-    }
+      navigate('/subscriptions');
+    };
+  
+    const handleCancelPlan = () => {
+      const deletar = {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      };
+      const promise = axios.delete(
+        'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions',
+        deletar
+      );
+      promise.then(() => {
+        navigate('/subscriptions');
+      });
+      promise.catch(() => {
+        alert("erro , tente mais tarde !");
+      });
+    };
+  
     return (
-        <Container>
+      <Container>
+        <div>
+          {user.membership && (
             <div>
-                {user.membership && (
-                    <div>
-                        <img src={user.membership.image} alt="Imagem do plano" />
-                        <h2>Olá, {user.name}</h2>
-                        <div>
-                            {user.membership.perks.map(perk => (
-                                <Button key={perk.id}>
-                                    <StyledLink to={perk.link}>{perk.title}</StyledLink>
-                                </Button>
-                            ))}
-                        </div>
-                        <ChangePlanButton onClick={handleChangePlan}>Mudar plano</ChangePlanButton>
-                        <CancelButton onClick={handleCancelPlan}>Cancelar plano</CancelButton>
-                    </div>
-                )}
+              <img src={user.membership.image} alt="Imagem do plano" />
+              <h2>Olá, {user.name}</h2>
+              <div>
+                {user.membership.perks.map(perk => (
+                  <Button key={perk.id}>
+                    <StyledLink to={perk.link}>{perk.title}</StyledLink>
+                  </Button>
+                ))}
+              </div>
+              <ChangePlanButton onClick={handleChangePlan}>Mudar plano</ChangePlanButton>
+              <CancelButton onClick={handleCancelPlan}>Cancelar plano</CancelButton>
             </div>
-        </Container>
+          )}
+        </div>
+      </Container>
     );
-}
+  }
 
 const CancelButton = styled.button`
   background-color: #ff6347;
