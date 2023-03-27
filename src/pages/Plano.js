@@ -5,7 +5,9 @@ import { useParams } from "react-router-dom";
 import { UserContext } from '../App';
 import volta from "../assets/volta.png";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 export default function Plano() {
+    const navigate = useNavigate();
     const [plano, setPlano] = useState({});
     const { id } = useParams();
     useEffect(() => {
@@ -63,13 +65,16 @@ export default function Plano() {
             })
             .catch((error) => {
                 console.log(error);
-            });
+            });    
     }
+    const handleVoltar = () => {
+        navigate('/subscriptions');
+      };
+
+
     return (
         <PlanoContainer>
-            <Link to='/subscriptions'>
-                <BotaoVolta src={volta} />
-            </Link>
+             <BotaoVolta src={volta} onClick={handleVoltar} />
 
             <Container>  <img src={plano.image} alt="plano" />
 
