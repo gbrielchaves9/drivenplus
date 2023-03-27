@@ -4,11 +4,10 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { UserContext } from '../App';
 import volta from "../assets/volta.png";
+import { Link } from 'react-router-dom';
 export default function Plano() {
     const [plano, setPlano] = useState({});
     const { id } = useParams();
-
-
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios
@@ -30,22 +29,18 @@ export default function Plano() {
     const [securityNumber, setSecurityNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
     const [showModal, setShowModal] = useState(false);
-
     const handleOpenModal = (event) => {
         event.preventDefault();
         setShowModal(true);
     };
-
     const handleConfirm = (event) => {
         event.preventDefault();
         handleSubmit(event);
         setShowModal(false);
     };
-
     const handleCancel = () => {
         setShowModal(false);
     };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
@@ -55,7 +50,6 @@ export default function Plano() {
             expirationDate,
             membershipId: plano.id,
         };
-
         const token = localStorage.getItem("token");
         axios
             .post(`https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions`, data, {
@@ -73,14 +67,18 @@ export default function Plano() {
     }
     return (
         <PlanoContainer>
-            <BotaoVolta>
-                <img src={volta} alt={"carregando"} />
-            </BotaoVolta>
+            <Link to='/subscriptions'>
+                <BotaoVolta src={volta} />
+            </Link>
 
+            <Container>  <img src={plano.image} alt="plano" />
 
-            <img src={plano.image} alt="plano" />
-            <div>
-                <p> Vantagens:</p>
+                <h1>{plano.name}</h1>
+
+            </Container>
+            <Beneficios>
+
+                <h1>Beneficios</h1>
                 {plano.perks && (
                     <ul>
                         {plano.perks.map((perk, index) => (
@@ -88,7 +86,13 @@ export default function Plano() {
                         ))}
                     </ul>
                 )}
-            </div>
+                 <h1>Preco:</h1>
+
+                <p>R$ {plano.price} cobrados mensalmente</p>
+
+            </Beneficios>
+
+
             <FormContainer onSubmit={handleSubmit}>
 
 
@@ -132,7 +136,7 @@ export default function Plano() {
             {showModal && (
                 <Modal>
                     <div>
-                        <p>Tem certeza que deseja assinar o plano R$ {plano.price}?</p>
+                        <p>Tem certeza que deseja assinar o {plano.name}  R$ {plano.price}?</p>
                         <button onClick={handleConfirm}>sim</button>
                         <button onClick={handleCancel}>Não</button>
                     </div>
@@ -141,12 +145,14 @@ export default function Plano() {
         </PlanoContainer>
     );
 }
-
-const BotaoVolta = styled.div`
-margin-top:22px;
-margin-right:22px;
-
+const BotaoVolta = styled.img`
+width: 28px;
+height:30px;
+position: fixed;
+top: 20px;
+left: 20px;
 `
+
 const Modal = styled.div`
   position: fixed;
   top: 0;
@@ -181,36 +187,26 @@ const Modal = styled.div`
     background-color:green;
   }
 `;
-
-
 const PlanoContainer = styled.div`
-  
-   
-  li{
-    color: white;
-  }
-    p {
-      color: white;
-    }
-    img{height:96px;
-width: 139px;
-}
+ margin: 30px 40px;
   `;
 
 const FormContainer = styled.label`
-   width: calc(100vw - 40px); 
+ 
     display: flex;
     align-items: center;
     margin: 20px 0;
     font-size: 18px;
     flex-direction: column;
     form{
+        width: calc(100vw - 60px);
         display:flex;
         align-items: center;
         flex-direction: column;
 
     }
     button {
+        width: calc(100vw - 60px);
         display:flex;
         justify-content: center;
         align-self: center;
@@ -230,25 +226,41 @@ border-radius: 5px;
 
   }
 `
+const Container = styled.div`
+    display:flex;
+        align-items: center;
+        flex-direction: column;
+        h1{
+            margin-top:12px;
+            color:white;
+            font-family: Roboto;
+font-size: 32px;
+font-weight: 700;
+        }
+        img{height:96px;
+width: 139px;
+}
 
-
-const InputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-    width: 80%;
-    label {
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-  
-    input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
-    }
   `;
+
+const Beneficios = styled.div`
+display:flex;
+margin-top:12px;
+margin-left:30px;
+    flex-direction: column;
+    margin-top:12px;
+    color:white;
+    h1{
+        margin-top:12px;
+font-size: 16px;
+font-weight: 400;
+    }
+
+    li{
+       
+    color: white;
+  }
+`;
 
 const Button = styled.button`
     background: #FF4791;
