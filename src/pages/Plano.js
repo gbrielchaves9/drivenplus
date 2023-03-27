@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { UserContext } from '../App';
+import volta from "../assets/volta.png";
 export default function Plano() {
     const [plano, setPlano] = useState({});
     const { id } = useParams();
@@ -72,6 +73,11 @@ export default function Plano() {
     }
     return (
         <PlanoContainer>
+            <BotaoVolta>
+                <img src={volta} alt={"carregando"} />
+            </BotaoVolta>
+
+
             <img src={plano.image} alt="plano" />
             <div>
                 <p> Vantagens:</p>
@@ -84,27 +90,25 @@ export default function Plano() {
                 )}
             </div>
             <FormContainer onSubmit={handleSubmit}>
-                <InputContainer>
 
-                    <input placeholder="Nome impresso no cartão"
-                        type="text"
-                        id="cardName"
-                        value={cardName}
-                        onChange={(event) => setCardName(event.target.value)}
-                        required
-                    />
-                </InputContainer>
-                <InputContainer>
 
-                    <input placeholder="Digitos do cartão"
-                        type="text"
-                        id="cardNumber"
-                        value={cardNumber}
-                        onChange={(event) => setCardNumber(event.target.value)}
-                        required
-                    />
-                </InputContainer>
-                <InputContainer>
+                <input placeholder="Nome impresso no cartão"
+                    type="text"
+                    id="cardName"
+                    value={cardName}
+                    onChange={(event) => setCardName(event.target.value)}
+                    required
+                />
+
+
+                <input placeholder="Digitos do cartão"
+                    type="text"
+                    id="cardNumber"
+                    value={cardNumber}
+                    onChange={(event) => setCardNumber(event.target.value)}
+                    required
+                />
+                <div>
 
                     <input placeholder="Código de segurança"
                         type="number"
@@ -113,8 +117,6 @@ export default function Plano() {
                         onChange={(event) => setSecurityNumber(event.target.value)}
                         required
                     />
-                </InputContainer>
-                <InputContainer>
 
                     <input placeholder="Validade"
                         type="text"
@@ -123,21 +125,28 @@ export default function Plano() {
                         onChange={(event) => setExpirationDate(event.target.value)}
                         required
                     />
-                </InputContainer>
+                </div>
+
                 <Button type="submit" onClick={handleOpenModal}>Assinar</Button>
-                {showModal && (
-                    <Modal>
-                        <div>
-                            <p>Tem certeza que deseja assinar o plano R$ {plano.price}?</p>
-                            <button onClick={handleConfirm}>sim</button>
-                            <button onClick={handleCancel}>Não</button>
-                        </div>
-                    </Modal>
-                )}
             </FormContainer>
+            {showModal && (
+                <Modal>
+                    <div>
+                        <p>Tem certeza que deseja assinar o plano R$ {plano.price}?</p>
+                        <button onClick={handleConfirm}>sim</button>
+                        <button onClick={handleCancel}>Não</button>
+                    </div>
+                </Modal>
+            )}
         </PlanoContainer>
     );
 }
+
+const BotaoVolta = styled.div`
+margin-top:22px;
+margin-right:22px;
+
+`
 const Modal = styled.div`
   position: fixed;
   top: 0;
@@ -160,9 +169,6 @@ const Modal = styled.div`
     color:black;
   }
   }
-
- 
-
   button {
     margin: 10px;
     padding: 5px 10px;
@@ -178,10 +184,8 @@ const Modal = styled.div`
 
 
 const PlanoContainer = styled.div`
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  
+   
   li{
     color: white;
   }
@@ -193,19 +197,39 @@ width: 139px;
 }
   `;
 
-const FormContainer = styled.form`
-  background: #0E0E13;
-    padding: 16px;
-    border-radius: 8px;
-    margin-top: 16px;
-    width: 80%;
+const FormContainer = styled.label`
+   width: calc(100vw - 40px); 
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 18px;
+    flex-direction: column;
+    form{
         display:flex;
         align-items: center;
         flex-direction: column;
 
-    
-  
-  `;
+    }
+    button {
+        display:flex;
+        justify-content: center;
+        align-self: center;
+        background: #FF4791;
+        width :100%;
+    }
+    input {
+        width: calc(100vw - 60px);
+        height: 45px;
+left: 36px;
+top: 279px;
+border-radius: 5px;
+    }
+    & > div {
+   display:flex;
+   width: calc(100vw - 60px);
+
+  }
+`
 
 
 const InputContainer = styled.div`

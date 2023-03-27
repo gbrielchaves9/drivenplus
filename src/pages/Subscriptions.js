@@ -47,13 +47,16 @@ export default function Subscriptions() {
 }
 
 const PlanosContainer = styled.div`
-  background-color:black;
   display:flex;
   flex-direction:column;
   align-items: center;
+
   p{
+    color: #fff;
+    font-weight: 700;
     font-size: 32px;
-    color: white;}
+    margin: 35px 0;
+    }
 `;
 
 const Plano = styled.div`
@@ -61,12 +64,21 @@ const Plano = styled.div`
   width: 290px;
   border-radius: 12px;
   display:flex;
-  
-  margin-top:91px;
+  margin-top:45px;
   border: 3px solid #7E7E7E;
-  img{
+  & > div {
+    display: flex;
+  align-items: center;
+  p {
+    margin-left: 35px;
+    font-weight: 700px;
+    font-size: 24px;
+  }
+    img{
+    margin-left:15px;
     height: 95px;
     width: 140px;
   }
-  
+  }
+ 
 `;

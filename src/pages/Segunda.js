@@ -31,7 +31,6 @@ export default function Segunda() {
     }
     return (
         <PageContainer>
-            <img src={logo} alt={"carregando"} />
 
             <ListContainer>
                 <form onSubmit={enviaDados}>
@@ -82,17 +81,17 @@ export default function Segunda() {
 const PageContainer = styled.div`
  width: 100%;
     height: 100vh;
-    background-color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 100px;
     p{
-        font-family: Lexend Deca;
+        font-family: Roboto;
 font-size: 14px;
 font-weight: 400;
 text-align: center;
+color: #FFFFFF;
     }
 `
 const ListContainer = styled.label`
@@ -108,6 +107,7 @@ const ListContainer = styled.label`
         justify-content: center;
         align-self: center;
         background: #FF4791;
+        width :100%;
     }
     input {
         width: calc(100vw - 60px);

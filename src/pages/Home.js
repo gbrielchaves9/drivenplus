@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 export default function Home() {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
-  
     const handleChangePlan = () => {
         alert("escolha um  plano novo !");
       navigate('/subscriptions');
@@ -98,12 +97,14 @@ const StyledLink = styled(Link)`
     `;
 
 const Container = styled.div`
-      color: white;
-      display: flex;
-      justify-content: center;
-    
-      img {
-        height: 50px;
-        width: 49px;
-      }
-    `;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 40px 0 50px 0;
+  }
+`
