@@ -86,7 +86,7 @@ export default function Plano() {
                         ))}
                     </ul>
                 )}
-                 <h1>Preco:</h1>
+                <h1>Preco:</h1>
 
                 <p>R$ {plano.price} cobrados mensalmente</p>
 
@@ -136,9 +136,11 @@ export default function Plano() {
             {showModal && (
                 <Modal>
                     <div>
-                        <p>Tem certeza que deseja assinar o {plano.name}  R$ {plano.price}?</p>
-                        <button onClick={handleConfirm}>sim</button>
-                        <button onClick={handleCancel}>Não</button>
+                        <p>Tem certeza que deseja assinar o {plano.name} R$ {plano.price}?</p>
+                      
+                            <Brosa onClick={handleConfirm}>sim</Brosa>
+                            <Bcinza onClick={handleCancel}>Não</Bcinza>
+                        
                     </div>
                 </Modal>
             )}
@@ -170,21 +172,14 @@ const Modal = styled.div`
     width: 248px;
     padding: 20px;
     border-radius: 5px;
+    height: 210px;
+width: 248px;
+display:flex;
+flex-direction: column;
     p {
     font-size: 18px;
     color:black;
   }
-  }
-  button {
-    margin: 10px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background-color:green;
   }
 `;
 const PlanoContainer = styled.div`
@@ -192,7 +187,6 @@ const PlanoContainer = styled.div`
   `;
 
 const FormContainer = styled.label`
- 
     display: flex;
     align-items: center;
     margin: 20px 0;
@@ -240,7 +234,6 @@ font-weight: 700;
         img{height:96px;
 width: 139px;
 }
-
   `;
 
 const Beneficios = styled.div`
@@ -255,13 +248,10 @@ margin-left:30px;
 font-size: 16px;
 font-weight: 400;
     }
-
     li{
-       
     color: white;
   }
 `;
-
 const Button = styled.button`
     background: #FF4791;
     border: none;
@@ -270,3 +260,25 @@ const Button = styled.button`
     font-size: 16px;
     cursor: pointer;
   `;
+
+const Brosa = styled.button`
+margin-top:100px;
+background: #FF4791;
+height: 52px;
+width: 50%;
+left: 86px;
+top: 376px;
+border-radius: 8px;
+cursor: pointer;
+`;
+const Bcinza = styled.button`
+margin-left:30px;
+background: #CECECE;
+height: 52px;
+width: 30%;
+left: 86px;
+top: 376px;
+border-radius: 8px;
+cursor: pointer;
+`;
+
