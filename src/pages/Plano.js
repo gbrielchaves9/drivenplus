@@ -62,6 +62,7 @@ export default function Plano() {
             .then((response) => {
                 console.log(response);
                 alert("pedido enviado")
+                navigate('/Home');
             })
             .catch((error) => {
                 console.log(error);
@@ -70,6 +71,7 @@ export default function Plano() {
     const handleVoltar = () => {
         navigate('/subscriptions');
       };
+  
 
 
     return (
