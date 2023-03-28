@@ -10,17 +10,9 @@ import { useEffect } from 'react';
 
 export default function Primeira() {
     const [email, setEmail] = useState("");
-    const [password, setSenha] = useState("");
+    const [password, setPassword] = useState("");
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setUser(token);
-        }
-    }, [setUser]);
-
 
     function enviaDados(e) {
         e.preventDefault();
@@ -39,6 +31,7 @@ export default function Primeira() {
                 });
                 console.log(res.data);
                 localStorage.setItem('token', token);
+                console.log(setUser)
                 navigate(membership ? "/home" : "/subscriptions");
             })
             .catch(err => {
@@ -46,6 +39,7 @@ export default function Primeira() {
                 console.log(err.data);
             });
     }
+
     return (
         <PageContainer>
             <img src={logo} alt={"carregando"} />
@@ -60,7 +54,7 @@ export default function Primeira() {
                     <input type="password" placeholder="senha"
                         required
                         value={password}
-                        onChange={e => setSenha(e.target.value)}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <button type="submit">Entrar</button>
                 </form>

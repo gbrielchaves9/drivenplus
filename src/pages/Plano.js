@@ -4,12 +4,13 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { UserContext } from '../App';
 import volta from "../assets/volta.png";
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { user } from '../pages/Subscriptions';
 export default function Plano() {
     const navigate = useNavigate();
     const [plano, setPlano] = useState({});
     const { id } = useParams();
+    const { user } = useContext(UserContext);
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios
@@ -26,23 +27,29 @@ export default function Plano() {
                 console.log(error);
             });
     }, [id]);
+
     const [cardName, setCardName] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [securityNumber, setSecurityNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
     const [showModal, setShowModal] = useState(false);
+
     const handleOpenModal = (event) => {
         event.preventDefault();
         setShowModal(true);
     };
+
     const handleConfirm = (event) => {
         event.preventDefault();
         handleSubmit(event);
         setShowModal(false);
+        navigate('/');
     };
+
     const handleCancel = () => {
         setShowModal(false);
     };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
@@ -60,19 +67,18 @@ export default function Plano() {
                 },
             })
             .then((response) => {
+                console.log(user)
                 console.log(response);
-                alert("pedido enviado")
-                navigate('/Home');
+                alert("pedido enviado") 
             })
             .catch((error) => {
                 console.log(error);
             });    
     }
+   
     const handleVoltar = () => {
         navigate('/subscriptions');
-      };
-  
-
+    };
 
     return (
         <PlanoContainer>

@@ -19,6 +19,7 @@ export default function Subscriptions() {
             .then((response) => {
                 setPlanos(response.data);
                 console.log(response.data);
+            
             })
             .catch((error) => {
                 console.log(error);
@@ -27,6 +28,7 @@ export default function Subscriptions() {
 
     const handleSelectPlan = (plano) => {
         localStorage.setItem("planoSelecionado", JSON.stringify(plano));
+        
     };
 
     return (

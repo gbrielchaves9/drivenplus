@@ -1,10 +1,10 @@
-import React, { useState ,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../App';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import axios from 'axios';
 export default function Home() {
   const navigate = useNavigate();
   const [plano, setPlano] = useState({});
@@ -14,10 +14,16 @@ export default function Home() {
 
   const membership = JSON.parse(localStorage.getItem('membership'));
 
+
+
+
   const handleChangePlan = () => {
     alert("escolha um  plano novo !");
     navigate('/subscriptions');
   };
+
+
+
   const handleCancelPlan = () => {
     const deletar = {
       headers: {
@@ -39,28 +45,28 @@ export default function Home() {
 
   return (
     <>
-    <Container>
-      <div>
-        {user.membership && (
-          <div>
-            <img src={user.membership.image} alt="Imagem do plano" />
-            <h2>Olá, {user.name}</h2>
+      <Container>
+        <div>
+          {plano && (
             <div>
-              {user.membership.perks.map(perk => (
-                <Button key={perk.id}>
-                  <StyledLink to={perk.link}>{perk.title}</StyledLink>
-                </Button>
-              ))}
+              <img src={plano.image} alt="Imagem do plano" />
+              <h2>Olá, {plano.name}</h2>
+              <div>
+                {plano.perks.map(perk => (
+                  <Button key={perk.id}>
+                    <StyledLink to={perk.link}>{perk.title}</StyledLink>
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </Container>
-       <ContainerBotao>
-       <ChangePlanButton onClick={handleChangePlan}>Mudar plano</ChangePlanButton>
-       <CancelButton onClick={handleCancelPlan}>Cancelar plano</CancelButton>
-     </ContainerBotao>
-       </>
+          )}
+        </div>
+      </Container>
+      <ContainerBotao>
+        <ChangePlanButton onClick={handleChangePlan}>Mudar plano</ChangePlanButton>
+        <CancelButton onClick={handleCancelPlan}>Cancelar plano</CancelButton>
+      </ContainerBotao>
+    </>
   );
 }
 
