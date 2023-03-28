@@ -69,97 +69,115 @@ export default function Plano() {
             .then((response) => {
                 console.log(user)
                 console.log(response);
-                alert("pedido enviado") 
+                alert("pedido enviado")
             })
             .catch((error) => {
                 console.log(error);
-            });    
+            });
     }
-   
+
     const handleVoltar = () => {
         navigate('/subscriptions');
     };
 
     return (
-        <PlanoContainer>
-             <BotaoVolta src={volta} onClick={handleVoltar} />
+        <>
+            <PlanoContainer>
+                <BotaoVolta src={volta} onClick={handleVoltar} />
 
-            <Container>  <img src={plano.image} alt="plano" />
+                <Container>  <img src={plano.image} alt="plano" />
 
-                <h1>{plano.name}</h1>
+                    <h1>{plano.name}</h1>
 
-            </Container>
-            <Beneficios>
+                </Container>
+                <Beneficios>
 
-                <h1>Beneficios</h1>
-                {plano.perks && (
-                    <ul>
-                        {plano.perks.map((perk, index) => (
-                            <li key={perk.id}>{`${index + 1}. ${perk.title}`}</li>
-                        ))}
-                    </ul>
-                )}
-                <h1>Preco:</h1>
+                    <h1>Beneficios</h1>
+                    {plano.perks && (
+                        <ul>
+                            {plano.perks.map((perk, index) => (
+                                <li key={perk.id}>{`${index + 1}. ${perk.title}`}</li>
+                            ))}
+                        </ul>
+                    )}
+                    <h1>Preco:</h1>
 
-                <p>R$ {plano.price} cobrados mensalmente</p>
+                    <p>R$ {plano.price} cobrados mensalmente</p>
 
-            </Beneficios>
-
-
-            <FormContainer onSubmit={handleSubmit}>
+                </Beneficios>
 
 
-                <input placeholder="Nome impresso no cartão"
-                    type="text"
-                    id="cardName"
-                    value={cardName}
-                    onChange={(event) => setCardName(event.target.value)}
-                    required
-                />
+                <FormContainer onSubmit={handleSubmit}>
 
 
-                <input placeholder="Digitos do cartão"
-                    type="text"
-                    id="cardNumber"
-                    value={cardNumber}
-                    onChange={(event) => setCardNumber(event.target.value)}
-                    required
-                />
-                <div>
-
-                    <input placeholder="Código de segurança"
-                        type="number"
-                        id="securityNumber"
-                        value={securityNumber}
-                        onChange={(event) => setSecurityNumber(event.target.value)}
-                        required
-                    />
-
-                    <input placeholder="Validade"
+                    <input placeholder="Nome impresso no cartão"
                         type="text"
-                        id="expirationDate"
-                        value={expirationDate}
-                        onChange={(event) => setExpirationDate(event.target.value)}
+                        id="cardName"
+                        value={cardName}
+                        onChange={(event) => setCardName(event.target.value)}
                         required
                     />
-                </div>
 
-                <Button type="submit" onClick={handleOpenModal}>Assinar</Button>
-            </FormContainer>
+
+                    <input placeholder="Digitos do cartão"
+                        type="text"
+                        id="cardNumber"
+                        value={cardNumber}
+                        onChange={(event) => setCardNumber(event.target.value)}
+                        required
+                    />
+                    <div>
+
+                        <input placeholder="Código de segurança"
+                            type="number"
+                            id="securityNumber"
+                            value={securityNumber}
+                            onChange={(event) => setSecurityNumber(event.target.value)}
+                            required
+                        />
+
+                        <input placeholder="Validade"
+                            type="text"
+                            id="expirationDate"
+                            value={expirationDate}
+                            onChange={(event) => setExpirationDate(event.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <Button type="submit" onClick={handleOpenModal}>Assinar</Button>
+                </FormContainer>
+
+            </PlanoContainer>
             {showModal && (
                 <Modal>
                     <div>
                         <p>Tem certeza que deseja assinar o {plano.name} R$ {plano.price}?</p>
-                      
-                            <Brosa onClick={handleConfirm}>sim</Brosa>
-                            <Bcinza onClick={handleCancel}>Não</Bcinza>
-                        
+                        <ContainerBot>
+                            
+                            <Bcinza onClick={handleCancel}><p>Não</p></Bcinza>
+                            <Brosa onClick={handleConfirm}><p>sim</p></Brosa>
+                        </ContainerBot>
+
                     </div>
                 </Modal>
             )}
-        </PlanoContainer>
+        </>
     );
 }
+const ContainerBot = styled.div`
+    display:flex;
+    margin-top:125px;
+        align-items: center;
+        justify-content:space-around;
+     p{
+        font-family: Roboto;
+font-size: 14px;
+font-weight: 400;
+     }
+      
+  `;
+
 const BotaoVolta = styled.img`
 width: 28px;
 height:30px;
@@ -167,7 +185,6 @@ position: fixed;
 top: 20px;
 left: 20px;
 `
-
 const Modal = styled.div`
   position: fixed;
   top: 0;
@@ -192,6 +209,10 @@ flex-direction: column;
     p {
     font-size: 18px;
     color:black;
+    font-family: Roboto;
+font-weight: 700;
+
+
   }
   }
 `;
@@ -275,7 +296,7 @@ const Button = styled.button`
   `;
 
 const Brosa = styled.button`
-margin-top:100px;
+
 background: #FF4791;
 height: 52px;
 width: 50%;
@@ -285,7 +306,7 @@ border-radius: 8px;
 cursor: pointer;
 `;
 const Bcinza = styled.button`
-margin-left:30px;
+
 background: #CECECE;
 height: 52px;
 width: 30%;
