@@ -4,15 +4,18 @@ import logo from "../assets/logo.png";
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { useContext } from "react";
-import { UserContext } from "../App";
+//import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import UserContext from './UserContext';
 
 export default function Primeira() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
+    
+    
 
     function enviaDados(e) {
         e.preventDefault();

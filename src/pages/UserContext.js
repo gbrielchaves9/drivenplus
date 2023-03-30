@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
+import { createContext } from 'react';
+export const UserContext = createContext(null);
 
 export const UserContext = React.createContext({
   user: (""),
@@ -11,8 +13,13 @@ export const UserProvider = ({ children }) => {
   const [membership, setMembership] = useState(null); 
 
   return (
-    <UserContext.Provider value={{ user, setUser, membership, setMembership }}> // incluir o estado do campo "membership" no valor do contexto
-      {children}
+    <UserContext.Provider value={{ user, setUser, membership, setMembership }}> 
     </UserContext.Provider>
   );
-};
+};*/
+
+
+import { createContext } from 'react';
+const UserContext = createContext();
+export default UserContext;
+

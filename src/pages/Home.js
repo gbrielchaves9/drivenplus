@@ -1,18 +1,22 @@
 import React, { useState ,useContext } from 'react';
-import { UserContext } from '../App';
+//import { UserContext } from '../App';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import UserContext from "./UserContext";
+import UserToken from "./UserToken";
 export default function Home() {
   const navigate = useNavigate();
   const [plano, setPlano] = useState({});
   const { id } = useParams();
   const { user } = useContext(UserContext);
-  const planoSelecionado = JSON.parse(localStorage.getItem("planoSelecionado"));
+  const { token, setToken } = useContext(UserToken);
 
   const membership = JSON.parse(localStorage.getItem('membership'));
+
+  console.log(user);
 
   const handleChangePlan = () => {
     alert("escolha um  plano novo !");
@@ -122,7 +126,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items:center;
-
   h1 {
     text-align: center;
     font-size: 24px;

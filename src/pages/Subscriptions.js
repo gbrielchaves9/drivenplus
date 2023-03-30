@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { UserContext } from "../App";
-
+import UserContext from './UserContext';
 export default function Subscriptions() {
     const { user } = useContext(UserContext);
     const [planos, setPlanos] = useState([]);

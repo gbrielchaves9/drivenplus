@@ -2,15 +2,17 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { UserContext } from '../App';
 import volta from "../assets/volta.png";
 import { useNavigate } from 'react-router-dom';
-import { user } from '../pages/Subscriptions';
+import UserContext from "./UserContext";
+import UserToken from "./UserToken";
+
 export default function Plano() {
     const navigate = useNavigate();
     const [plano, setPlano] = useState({});
     const { id } = useParams();
     const { user } = useContext(UserContext);
+  
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios
@@ -195,7 +197,6 @@ const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   & > div {
     background-color: #FFFFFF;
     height: 210px;
@@ -211,8 +212,6 @@ flex-direction: column;
     color:black;
     font-family: Roboto;
 font-weight: 700;
-
-
   }
   }
 `;
@@ -231,7 +230,6 @@ const FormContainer = styled.label`
         display:flex;
         align-items: center;
         flex-direction: column;
-
     }
     button {
         width: calc(100vw - 60px);
@@ -251,7 +249,6 @@ border-radius: 5px;
     & > div {
    display:flex;
    width: calc(100vw - 60px);
-
   }
 `
 const Container = styled.div`
@@ -296,7 +293,6 @@ const Button = styled.button`
   `;
 
 const Brosa = styled.button`
-
 background: #FF4791;
 height: 52px;
 width: 50%;
@@ -306,7 +302,6 @@ border-radius: 8px;
 cursor: pointer;
 `;
 const Bcinza = styled.button`
-
 background: #CECECE;
 height: 52px;
 width: 30%;
@@ -315,4 +310,3 @@ top: 376px;
 border-radius: 8px;
 cursor: pointer;
 `;
-

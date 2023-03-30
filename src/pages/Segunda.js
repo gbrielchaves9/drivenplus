@@ -3,7 +3,8 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../App";
+//import { UserContext } from "../App";
+import UserContext from "./UserContext";
 
 export default function Segunda() {
   const [form, setForm] = useState({ email: "", password: "", name: "", cpf: "" });
